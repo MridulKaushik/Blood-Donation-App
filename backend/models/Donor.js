@@ -7,7 +7,7 @@ const DonorSchema = new mongoose.Schema({
   address: { type: String },
   bloodGroup: { type: String, required: true },
   bloodPressure: { type: Number },
-  phoneNumber: { type: String },
+  phoneNumber: { type: String, required: true },
   diseases: { type: [String] },
   height: { type: Number },
   weight: { type: Number },

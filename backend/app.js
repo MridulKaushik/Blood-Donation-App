@@ -16,6 +16,7 @@ app.get("", (req, res, next) => {
 });
 
 app.get("/api/auth/get", (req, res)=>{
+  
   res.send("Go to /api/auth/register ");
 })
 

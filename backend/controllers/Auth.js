@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
           process.env.PASS // Secret Key needed to decrypt password on other end
         ).toString(),
       });
-      
+
       const user = await newUser.save();
       res.status(201).json(user);
     };
