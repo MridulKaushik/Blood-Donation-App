@@ -67,7 +67,9 @@ const getDonorStats = async (req, res) => {
               _id: "$bloodGroup",
               count: {$sum: 1},
             }}
-        ])
+        ]);
+
+        res.status(200).json(stats);
     } catch(error){
         res.status(500).json(error)
     }
