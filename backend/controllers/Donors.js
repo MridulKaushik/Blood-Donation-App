@@ -2,9 +2,26 @@ const Donor = require("../models/Donor");
 
 const registerDonor = async (req, res) => {
   try {
-    const newDonor = new Donor(req.body);
-    const donor = await newDonor.save();
-    res.status(201).json(donor);
+    const { name, email, bloodGroup, phoneNumber, age } = req.body;
+    const checkDonor = await Donor.findOne({
+      name: name,
+      email: email,
+      bloodGroup: bloodGroup,
+      phoneNumber: phoneNumber,
+      age: age,
+    });
+
+    if (checkDonor) {
+      console.log(checkDonor._id);
+      // const updatedDonor = await updateDonor(req.body);
+      // res.status(200).json(updatedDonor);
+      res.status(409).json('Donor alredy exist');
+    } else {
+      const newDonor = new Donor(req.body);
+      const donor = await newDonor.save();
+      res.status(201).json(donor);
+    }
+
   } catch (err) {
     res.status(501).json(err);
   }
@@ -27,8 +44,8 @@ const updateDonor = async (req, res) => {
       { new: true }
     );
     res.status(200).json(updatedDonor);
-  } catch (error) {
-    res.status(500).json(err);
+  } catch (err) {
+    res.status(501).json(err);
   }
 };
 
@@ -48,14 +65,10 @@ const deleteDonor = async (req, res) => {
     throw new Error("Failed to fetch donor");
   }
   try {
-    await Donor.findByIdAndDelete(req.params.id, function (err, docs) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.status(201).json("Deleted donor - ", docs);
-      }
-    });
+    await Donor.findByIdAndDelete(req.params.id);
+    res.status(200).json("Deleted Donor");
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 };
@@ -78,10 +91,10 @@ const getDonorStats = async (req, res) => {
 };
 
 module.exports = {
-    registerDonor, 
-    getAllDonors,
-    updateDonor,
-    getDonor,
-    deleteDonor,
-    getDonorStats
-}
+  registerDonor,
+  getAllDonors,
+  updateDonor,
+  getDonor,
+  deleteDonor,
+  getDonorStats,
+};
