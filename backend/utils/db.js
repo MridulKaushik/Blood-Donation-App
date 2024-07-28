@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 dotenv.config();
+
 const DB = process.env.DB;
 
 const dbConnection = async () => {
