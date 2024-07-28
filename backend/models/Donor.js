@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const defaultDob = function () {
   let date = new Date();
-  date.setFullYear(date.getFullYear() - 18);
+  date.setFullYear(date.getFullYear() - this.age);
   return date;
 };
 
