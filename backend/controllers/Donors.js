@@ -48,29 +48,40 @@ const deleteDonor = async (req, res) => {
     throw new Error("Failed to fetch donor");
   }
   try {
-    await Donor.findByIdAndDelete(req.params.id, function(err, docs){
-        if (err){
-            console.log(err);
-        }else{
-            res.status(201).json('Deleted donor - ', docs);
-        }
-    })
+    await Donor.findByIdAndDelete(req.params.id, function (err, docs) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(201).json("Deleted donor - ", docs);
+      }
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
 const getDonorStats = async (req, res) => {
-    try{
-        const stats = await Donor.aggregate([
-            {$group: {
-              _id: "$bloodGroup",
-              count: {$sum: 1},
-            }}
-        ]);
+  try {
+    const stats = await Donor.aggregate([
+      {
+        $group: {
+          _id: "$bloodGroup",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
 
-        res.status(200).json(stats);
-    } catch(error){
-        res.status(500).json(error)
-    }
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
+
+module.exports = {
+    registerDonor, 
+    getAllDonors,
+    updateDonor,
+    getDonor,
+    deleteDonor,
+    getDonorStats
+}
