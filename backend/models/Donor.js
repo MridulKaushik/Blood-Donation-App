@@ -13,7 +13,7 @@ const DonorSchema = new mongoose.Schema(
     age: { type: Number, required: true },
     address: { type: String, default: " " },
     bloodGroup: { type: String, required: true },
-    bloodPressure: { type: String, default: "90-120" },
+    bloodPressure: { type: String, default: "80-120" },
     phoneNumber: { type: String, required: true },
     diseases: { type: [String] },
     height: { type: Number },
