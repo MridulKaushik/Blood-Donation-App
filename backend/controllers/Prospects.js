@@ -16,18 +16,19 @@ const registerProspect = async (req, res) => {
       res.status(409).json("Prospect alredy exist");
     } else {
       const newProspect = new Prospect(req.body);
-      const Prospect = await newProspect.save();
-      res.status(201).json(Prospect);
+      const prospect = await newProspect.save();
+      res.status(201).json(prospect);
     }
   } catch (err) {
+    console.log(err);
     res.status(501).json(err);
   }
 };
 
 const getAllProspects = async (req, res) => {
   try {
-    const Prospects = await Prospect.find({}).sort({ created_at: -1 });
-    res.status(200).json(Prospects);
+    const prospects = await Prospect.find({}).sort({ created_at: -1 });
+    res.status(200).json(prospects);
   } catch (err) {
     res.stauts(500).json(err);
   }
@@ -48,16 +49,17 @@ const updateProspect = async (req, res) => {
 
 const getProspect = async (req, res) => {
   try {
-    const Prospect = await Prospect.findById(req.params.id);
-    res.status(200).json(Prospect);
-  } catch (error) {
+    const prospect = await Prospect.findById(req.params.id);
+    res.status(200).json(prospect);
+  } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 };
 
 const deleteProspect = async (req, res) => {
   try {
-    const Prospect = await Prospect.findById(req.params.id);
+    const prospect = await Prospect.findById(req.params.id);
   } catch (error) {
     throw new Error("Failed to fetch Prospect");
   }
