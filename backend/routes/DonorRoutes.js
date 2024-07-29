@@ -16,13 +16,13 @@ router.post("/register", registerDonor);
 router.get("/", getAllDonors);
 
 // Get a donor
-router.get("/:id", getDonor);
+router.get("/find/:id", getDonor);
 
 // Update Donor
-router.put("/update/:id", updateDonor);
+router.put("/:id", updateDonor);
 
 // Delete a donor
-router.delete("/delete/:id", deleteDonor);
+router.delete("/:id", deleteDonor);
 
 // Get Donor Stats
 router.get("/stats", getAllDonors);
