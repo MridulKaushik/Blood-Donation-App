@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const authRoutes = require('./routes/Authorize');
 const donorRoutes = require('./routes/DonorRoutes');
+const prospectRoutes = require('./routes/ProspectRoutes');
 
 module.exports = app;
 
@@ -25,3 +26,4 @@ app.get("/api/auth/get", (req, res)=>{
 // Routes
 app.use('/api/auth/', authRoutes);
 app.use('/api/donors', donorRoutes);
+app.use('/api/prospects', prospectRoutes);
