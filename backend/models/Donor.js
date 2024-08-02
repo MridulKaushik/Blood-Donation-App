@@ -11,7 +11,7 @@ const DonorSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true },
     age: { type: Number, required: true },
-    address: { type: String, default: " " },
+    address: { type: String, default: "" },
     bloodGroup: { type: String, required: true },
     bloodPressure: { type: String, default: "80-120" },
     phoneNumber: { type: String, required: true },
@@ -26,5 +26,10 @@ const DonorSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Trying the vitruals function of mongoose
+// DonorSchema.virtual('domain').get(function(){
+//   return this.email.slice(this.email.indexOf('@')+1);
+// })
 
 module.exports = mongoose.model("Donor", DonorSchema);
