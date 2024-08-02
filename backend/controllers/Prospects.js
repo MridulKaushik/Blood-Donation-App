@@ -12,7 +12,7 @@ const registerProspect = async (req, res) => {
     });
 
     if (checkProspect) {
-    //   console.log(checkProspect._id);
+      // console.log(checkProspect);
       res.status(409).json("Prospect alredy exist");
     } else {
       const newProspect = new Prospect(req.body);

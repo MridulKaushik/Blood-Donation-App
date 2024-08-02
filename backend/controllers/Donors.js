@@ -13,13 +13,12 @@ const registerDonor = async (req, res) => {
 
     if (checkDonor) {
       console.log(checkDonor._id);
-      // const updatedDonor = await updateDonor(req.body);
-      // res.status(200).json(updatedDonor);
       res.status(409).json('Donor alredy exist');
     } else {
       const newDonor = new Donor(req.body);
       const donor = await newDonor.save();
-      res.status(201).json(donor);
+      // console.log(donor.domain); // Trying the vitruals function of mongoose
+      res.status(201).json({success:true, data:donor});
     }
 
   } catch (err) {

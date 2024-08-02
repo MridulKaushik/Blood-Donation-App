@@ -34,11 +34,10 @@ const registerUser = async (req, res) => {
   }
 };
 
-// LoGIN User
+// Login User
 const login = async (req, res) => {
   try {
     const user = await User.findOne({
-      name: req.body.name,
       email: req.body.email,
     });
     if (!user) {
