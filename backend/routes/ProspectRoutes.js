@@ -1,16 +1,11 @@
-const {
-  registerProspect,
-  getAllProspects,
-  updateProspect,
-  getProspect,
-  deleteProspect,
-  getProspectStats,
-} = require("../controllers/Prospects");
+const { registerProspect, getAllProspects, updateProspect, getProspect, deleteProspect, getProspectStats } = require("../controllers/Prospects");
+const VerifyToken = require("../middlewares/verifyToken");
+
 const express = require("express");
 const router = express.Router();
 
 // Register the Prospect
-router.post("/register", registerProspect);
+router.post("/register", VerifyToken, registerProspect);
 
 // List all Prospects
 router.get("/", getAllProspects);
@@ -25,6 +20,6 @@ router.put("/:id", updateProspect);
 router.delete("/:id", deleteProspect);
 
 // Get Prospect Stats
-router.get("/stats", getAllProspects);
+router.get("/stats", getProspectStats);
 
 module.exports = router;
