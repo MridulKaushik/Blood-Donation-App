@@ -67,8 +67,7 @@ const deleteProspect = async (req, res) => {
     await Prospect.findByIdAndDelete(req.params.id);
     res.status(200).json("Deleted Prospect");
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   }
 };
 
