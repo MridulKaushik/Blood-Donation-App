@@ -13,14 +13,13 @@ const registerDonor = async (req, res) => {
 
     if (checkDonor) {
       console.log(checkDonor._id);
-      res.status(409).json('Donor alredy exist');
+      res.status(409).json("Donor alredy exist");
     } else {
       const newDonor = new Donor(req.body);
       const donor = await newDonor.save();
       // console.log(donor.domain); // Trying the vitruals function of mongoose
-      res.status(201).json({success:true, data:donor});
+      res.status(201).json({ success: true, data: donor });
     }
-
   } catch (err) {
     res.status(501).json(err);
   }
@@ -67,7 +66,7 @@ const deleteDonor = async (req, res) => {
     await Donor.findByIdAndDelete(req.params.id);
     res.status(200).json("Deleted Donor");
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json(err);
   }
 };
@@ -76,9 +75,24 @@ const getDonorStats = async (req, res) => {
   try {
     const stats = await Donor.aggregate([
       {
+        //     $group: {
+        //       _id: "$bloodGroup",
+        //       count: { $sum: 1 },
+        //     },
+        //   },
+        // ]);
         $group: {
-          _id: "$bloodGroup",
+          _id: "$date",
+          donorIds: { $push: "$_id" },
           count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          _id: 0,
+          donorIds: 1,
+          count: 1,
         },
       },
     ]);
