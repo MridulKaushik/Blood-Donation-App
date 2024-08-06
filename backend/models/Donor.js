@@ -6,6 +6,17 @@ const defaultDob = function () {
   return date;
 };
 
+const defaultDate = function () {
+  let now = new Date();
+
+  let date = now.getDate();
+  let month = now.getMonth();
+  let year = now.getFullYear();
+
+  let finalDate = new Date(year, month, date).toLocaleDateString();
+  return finalDate;
+};
+
 const DonorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -18,7 +29,7 @@ const DonorSchema = new mongoose.Schema(
     diseases: { type: [String] },
     height: { type: Number },
     weight: { type: Number },
-    date: { type: Date, default: Date.now() },
+    date: { type: String, default: defaultDate },
     dob: { type: Date, default: defaultDob },
     status: { type: Number, default: 0 },
   },
