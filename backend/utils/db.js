@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 dotenv.config();
 
 const DB = process.env.DB;
+const options = {};
 
 const dbConnection = async () => {
   try {
-    await mongoose.connect(DB).then(() => {
+    await mongoose.connect(DB, options).then(() => {
       console.log("Connection Established");
     });
   } catch (err) {
