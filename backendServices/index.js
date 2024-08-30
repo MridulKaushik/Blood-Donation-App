@@ -10,17 +10,20 @@ dotenv.config();
 const run = () => { 
     cron.schedule("5 5 * * * ", () => {
       console.log("running a task at 5 5 * * * ");
+    },
+    {
+      timezone: "Asia/Kolkata"
     });
 };
 
 // SERVER CONFIG
 const PORT = process.env.PORT || 5001;
+run();
 
 app.get("", (req, res, next) => {
   res.send("BackendSerivces is working");
 });
 
-run();
 
 app.listen(PORT, () => {
   console.log(`listening on port http://localhost:${PORT}/`);
